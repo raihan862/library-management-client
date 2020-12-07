@@ -19,7 +19,7 @@ const AddBook = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(bookInfo.file);
+         
         if (bookInfo.file == "") {
             setError(true)
         }
@@ -38,7 +38,7 @@ const AddBook = () => {
                 body: data
 
             }).then(res => {
-                console.log("come");
+                 
                 setContent(false);
                 setBookInfo({ bookName: "", author: "",genre:"",releaseDate:"", file: "" })
             })

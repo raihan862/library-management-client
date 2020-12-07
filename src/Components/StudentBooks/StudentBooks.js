@@ -21,7 +21,7 @@ const StudentBooks = () => {
     }
     const handleSubmit=e=>{
         e.preventDefault();
-        console.log(name);
+        
         fetch(`https://frozen-sierra-38115.herokuapp.com/getBook/${name}`)
         .then(res=>res.json())
         .then(data=>{

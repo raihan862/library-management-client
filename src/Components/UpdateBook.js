@@ -5,11 +5,13 @@ import Modal from 'react-modal'
 import { useHistory, useLocation } from 'react-router-dom';
 const UpdateBook = () => {
     const location = useLocation()
-    const data = location.state.detail;
-    const {_id,bookName,author,genre,status,releaseDate,bookImage} = data
-    const [bookInfo, setBookInfo] = useState({ bookName:bookName , author: author,genre:genre,status:status,releaseDate:releaseDate,bookImage:bookImage ,file: "" })
+    const data1 = location.state.detail;
+    const {_id,bookName,author,genre,status,releaseDate} = data1
+     
+    const [bookInfo, setBookInfo] = useState({ bookName:bookName , author: author,genre:genre,status:status,releaseDate:releaseDate ,file: "" })
     const [error, setError] = useState(false);
      const history = useHistory()
+    
     const handleChage = e => {
         const newService = { ...bookInfo }
         newService[e.target.name] = e.target.value;
@@ -24,14 +26,19 @@ const UpdateBook = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        
+        console.log(data1.bookImage);
         let data = new FormData();
         data.append('bookName', bookInfo.bookName)
         data.append('author', bookInfo.author)
         data.append('genre', bookInfo.genre)
         data.append('status', bookInfo.status)
         data.append('releaseDate', bookInfo.releaseDate)
-        data.append('bookImage', bookInfo.bookImage)
+        data.append('contentType', data1.bookImage.contentType)
+        data.append('size', data1.bookImage.size)
+        data.append('img', data1.bookImage.img)
         data.append('file', bookInfo.file)
+        
        
             fetch(`https://frozen-sierra-38115.herokuapp.com/updateBook/${_id}`, {
                 method: "PATCH",
@@ -40,12 +47,12 @@ const UpdateBook = () => {
                 body:data
 
             }).then(res => {
-                console.log("successfullyupdate");
+               
                history.replace('/librarian')
                  
             })
                 .catch(err => {
-                    console.log(err);
+                   
                 })
         
 
@@ -100,7 +107,7 @@ const UpdateBook = () => {
                             <div id="part2" >
                                 <Button className="btnstyle2" onClick={() => document.getElementById("file").click()}><HiCloudUpload /> Upload Photo</Button>
                                 <input type="file" name="file" id="file"  onChange={handleChageFile} style={{ display: "none" }} />
-                                <small style={{ padding: "10px", color: "#009444" }}>{bookInfo.file.name || bookInfo.bookImage.name}</small>
+                                <small style={{ padding: "10px", color: "#009444" }}>{bookInfo.file.name  }</small>
                                 {
                                     error && <small style={{ padding: "10px", color: "red", fontWeight: "600" }}>have to to upload an image</small>
                                 }

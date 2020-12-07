@@ -62,9 +62,7 @@ const AllBooks = () => {
                     </Row>
                 )
             }
-              {/* <Modal isOpen={isModelOpen}>
-                     <UpdateBook data={data[0]} isModelOpen= {isModelOpen} setIsmodalOpen = {setIsmodalOpen} ></UpdateBook>
-            </Modal> */}
+              
         </div>
     )
 };
