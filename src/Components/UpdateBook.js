@@ -41,9 +41,7 @@ const UpdateBook = () => {
         
        
             fetch(`https://frozen-sierra-38115.herokuapp.com/updateBook/${_id}`, {
-                method: "PATCH",
-                
-                
+                method: "PUT",
                 body:data
 
             }).then(res => {
